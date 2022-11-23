@@ -37,14 +37,14 @@ public class TeacherController {
             return teacherService.getAll(pageable);
     }
 
-    @GetMapping("/get/teacher")
+    @PostMapping("/get/teacher")
     @ResponseStatus(HttpStatus.OK)
     public Teacher findTeacher(@RequestBody SearchDTO dto){
         return teacherService.findTeacher(dto.getName(),dto.getSurname())
                 .orElseThrow(EntityNotFoundException::new);
     }
 
-    @GetMapping("/get/teacher/students")
+    @PostMapping("/get/teacher/students")
     @ResponseStatus(HttpStatus.OK)
     public Set<Student> findTeacherStudents(@RequestBody SearchDTO dto){
         Teacher teacher = teacherService.findTeacherStudents(dto.getName(), dto.getSurname())
@@ -67,9 +67,8 @@ public class TeacherController {
 
     @DeleteMapping("/delete/teacher")
     @ResponseStatus(HttpStatus.OK)
-    public void removeTeacher(@Valid @RequestBody TeacherDTO teacherDTO){
-        Teacher mappedTeacher = modelMapper.map(teacherDTO,Teacher.class);
-        teacherService.removeTeacher(mappedTeacher);
+    public void removeTeacher(@RequestBody SearchDTO dto){
+        teacherService.removeTeacher(dto.getName(),dto.getSurname());
     }
 
 

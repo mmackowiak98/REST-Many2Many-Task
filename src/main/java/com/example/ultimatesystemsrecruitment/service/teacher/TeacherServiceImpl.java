@@ -72,8 +72,10 @@ public class TeacherServiceImpl implements TeacherService {
 
     }
     @Override
-    public void removeTeacher(Teacher teacher) {
-        teacherRepository.delete(teacher);
+    public void removeTeacher(String name, String surname) {
+        Teacher teacherToDelete = teacherRepository.findByNameIgnoreCaseAndSurnameIgnoreCase(name, surname)
+                .orElseThrow(EntityNotFoundException::new);
+        teacherRepository.delete(teacherToDelete);
     }
     @Override
     public Optional<Teacher> findTeacher(String name, String surname) {

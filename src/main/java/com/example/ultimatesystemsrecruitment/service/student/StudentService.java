@@ -15,7 +15,7 @@ public interface StudentService {
 
     Student removeTeacherFromStudent(String studentSurname, String teacherSurname);
 
-    void removeStudent(Student student);
+    void removeStudent(String name, String surname);
 
     Optional<Student> findStudent(String name, String surname);
 

@@ -73,8 +73,10 @@ public class StudentServiceImpl implements StudentService {
         return null;
     }
     @Override
-    public void removeStudent(Student student) {
-        studentRepository.delete(student);
+    public void removeStudent(String name, String surname) {
+        Student studentToDelete = studentRepository.findByNameIgnoreCaseAndSurnameIgnoreCase(name, surname)
+                .orElseThrow(EntityNotFoundException::new);
+        studentRepository.delete(studentToDelete);
     }
     @Override
     public Optional<Student> findStudent(String name, String surname) {

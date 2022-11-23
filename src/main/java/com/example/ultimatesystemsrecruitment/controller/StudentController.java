@@ -68,8 +68,7 @@ public class StudentController {
 
     @DeleteMapping("/delete/student")
     @ResponseStatus(HttpStatus.OK)
-    public void removeTeacher(@Valid @RequestBody StudentDTO studentDTO){
-        Student mappedStudent = modelMapper.map(studentDTO,Student.class);
-        studentService.removeStudent(mappedStudent);
+    public void removeTeacher(@Valid @RequestBody SearchDTO dto){
+        studentService.removeStudent(dto.getName(), dto.getSurname());
     }
 }

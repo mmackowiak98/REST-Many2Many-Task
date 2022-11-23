@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface TeacherService {
 
     Teacher saveEntity(Teacher teacher);
-    void removeTeacher(Teacher teacher);
+    void removeTeacher(String name, String surname);
     Page<Teacher> getAll(Pageable pageable);
     Optional<Teacher> findTeacher(String name, String surname);
     Optional<Teacher> findTeacherStudents(String name, String surname);
